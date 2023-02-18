@@ -1,0 +1,52 @@
+﻿@typeparam Titem
+
+@if(MyList is null)
+{
+    @if(Loading is null)
+    {
+        <div class="align-items-center">
+            <img src="https://i.stack.imgur.com/hzk6C.gif" />
+        </div>
+    }
+    else
+    {
+        @Loading
+    }
+
+
+}else if(MyList.Count == 0)
+{
+    @if(NoRecords is null)
+    {
+        <div>
+            <p>No hay registros para mostrar...</p>
+        </div>
+    }
+    else
+    {
+        @NoRecords
+    }
+
+}else
+{
+    //Aca esta llena
+    @Body
+}
+
+@code {
+    //Parametros
+    [Parameter]
+    public RenderFragment? Loading { get; set; }
+
+    [Parameter]
+    public RenderFragment? NoRecords { get; set; }
+
+    [Parameter]
+    [EditorRequired] //Esto es para que se un parametro obligatorio
+    public RenderFragment? Body { get; set; } = null!;
+
+
+    [Parameter]
+    [EditorRequired]
+    public List<Titem> MyList { get; set; } = null!;
+}
