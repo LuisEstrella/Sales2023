@@ -1,0 +1,18 @@
+﻿@page "/countries/create"
+@inject IRepository repository
+@inject NavigationManager navigationManager
+@inject SweetAlertService sweetAlertService
+
+<h3>Crear País</h3>
+
+<CountryForm 
+    @ref ="countryForm"
+    Country="country" 
+    OnValidSubmit="Create"
+    ReturnAction="Return">
+
+</CountryForm>
+
+@code {
+ 
+}
