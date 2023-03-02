@@ -17,13 +17,34 @@ namespace Sales.API.Controllers
             _context = context;
         }
 
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllCategory()
+        {
+            return Ok(await _context.Categories.ToListAsync());
+        }
+
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetAsync(int id)
+        {
+            var category = await _context.Categories.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (category is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(category);
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateAsync(Category category)
         {
             try
             {
-                await _context.AddAsync(category);
-                _context.SaveChanges();
+                _context.Add(category);
+                await _context.SaveChangesAsync();
                 return Ok(category);
             }
             catch (DbUpdateException dbUpdateException)
@@ -43,10 +64,43 @@ namespace Sales.API.Controllers
 
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAllCategory()
+        [HttpPut]
+        public async Task<IActionResult> PutAsync(Category category)
         {
-            return Ok(await _context.categories.ToListAsync());
+
+            try
+            {
+                _context.Update(category);
+                await _context.SaveChangesAsync();
+                return Ok(category);
+            }
+            catch (DbUpdateException dbUpdateException)
+            {
+
+                if (dbUpdateException.InnerException!.Message.Contains("duplicate"))
+                {
+                    return BadRequest("Ya existe una cateogria con el mismo nombre.");
+                }
+                return BadRequest(dbUpdateException.Message);
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteAsync(int id)
+        {
+            var category = await _context.Categories.FirstOrDefaultAsync(x => x.Id == id); // o menor volver a poenr la consulta?
+            if (category is null)
+            {
+                return NotFound();
+            }
+
+            _context.Remove(category);
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
     }
 

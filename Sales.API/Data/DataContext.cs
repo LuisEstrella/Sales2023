@@ -16,7 +16,7 @@ namespace Sales.API.Data
 
 
 
-        public DbSet<Category> categories { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,6 +28,9 @@ namespace Sales.API.Data
             modelBuilder.Entity<State>().HasIndex("CountryId", "Name").IsUnique(); // Esto es para los nombres no se repitan por pais, ejemplo en antioquia no va a ver mas de un rionegro
 
             modelBuilder.Entity<City>().HasIndex("StateId", "Name").IsUnique(); //Esto es para que la ciudad no se repita por estado
+
+
+            modelBuilder.Entity<Category>().HasIndex(x => x.Name).IsUnique();
         }
     }
 }
