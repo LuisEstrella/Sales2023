@@ -36,6 +36,13 @@ namespace Sales.API.Data
                 _context.Categories.Add(new Category { Name = "Camisetas" });
                 _context.Categories.Add(new Category { Name = "Pantalones" });
                 _context.Categories.Add(new Category { Name = "Ropa Deportiva" });
+                _context.Categories.Add(new Category { Name = "Joggers" });
+                _context.Categories.Add(new Category { Name = "Buzos y Chaquetas" });
+                _context.Categories.Add(new Category { Name = "Camisas" });
+                _context.Categories.Add(new Category { Name = "Polos" });
+                _context.Categories.Add(new Category { Name = "Medias" });
+                _context.Categories.Add(new Category { Name = "Zapatos" });
+                _context.Categories.Add(new Category { Name = "Gorras" });
                 await _context.SaveChangesAsync();
             }
         }
