@@ -12,8 +12,9 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th></th>
                     <th>País</th>
+                    <th>Estados/ Departamentos</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -21,11 +22,13 @@
                 {
                     <tr>
                         <td>
-                            <a href="/countries/edit/@country.Id" class="btn btn-warning">Editar</a>
-                            <button class="btn btn-danger" @onclick=@(() => DeleteAsync(country.Id))>Borrar</button>
+                            @country.Name
+                        </td><td>
+                            @country.StatesNumber
                         </td>
                         <td>
-                            @country.Name
+                            <a href="/countries/edit/@country.Id" class="btn btn-warning">Editar</a>
+                            <button class="btn btn-danger" @onclick=@(() => DeleteAsync(country.Id))>Borrar</button>
                         </td>
                     </tr>   
                 }

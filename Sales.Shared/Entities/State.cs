@@ -11,6 +11,9 @@ namespace Sales.Shared.Entities
         [MaxLength(100, ErrorMessage = "El campo {0} no puede tener más de {1} caractéres")]
         public string Name { get; set; } = null!;
 
+        //Esto es para saber de que pais es mi estado
+        public int CountryId { get; set; } 
+
         //Un estado pertenece a un país
         public Country? Country { get; set; }
 

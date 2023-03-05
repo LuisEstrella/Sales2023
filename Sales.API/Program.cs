@@ -1,8 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Sales.API.Data;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers()
+    .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles); // para evitar redundancia ciclica ejemplo, esto es para decirl que una ciudad pertenece a un estado y un estado a un pais
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

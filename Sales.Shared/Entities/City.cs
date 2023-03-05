@@ -17,6 +17,9 @@ namespace Sales.Shared.Entities
         [MaxLength(100, ErrorMessage = "El campo {0} no puede tener más de {1} caractéres")]
         public string Name { get; set; } = null!;
 
+        //Un ciudad pertenece a un estado
+        public int StateId { get; set; }
+
         //Un ciudad pertenece a un departamento
         public State? State { get; set; }
     }
