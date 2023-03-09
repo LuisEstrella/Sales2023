@@ -12,7 +12,7 @@ namespace Sales.Shared.Entities
         public string Name { get; set; } = null!;
 
         //Esto es para saber de que pais es mi estado
-        public int CountryId { get; set; } 
+        public int CountryId { get; set; }
 
         //Un estado pertenece a un país
         public Country? Country { get; set; }

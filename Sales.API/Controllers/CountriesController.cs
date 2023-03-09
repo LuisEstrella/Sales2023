@@ -94,13 +94,13 @@ namespace Sales.API.Controllers
             catch (DbUpdateException dbUpdateException)
             {
 
-                if(dbUpdateException.InnerException!.Message.Contains("duplicate"))
+                if (dbUpdateException.InnerException!.Message.Contains("duplicate"))
                 {
                     return BadRequest("Ya existe un país con el mismo nombre.");
                 }
                 return BadRequest(dbUpdateException.Message);
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 return BadRequest(exception.Message);
             }
