@@ -1,10 +1,10 @@
 ﻿<nav>
-    <ul class="pagination justify-content-center">
+    <ul class="pagination pagination-sm justify-content-center">
 
         @foreach (var link in Links)
         {
             <li @onclick=@(() => InternalSelectedPage(link)) style="cursor: pointer" class="page-item @(link.Enable ? null : "disabled") @(link.Enable ? "active" : null)">
-                <a class="page-link">@link.Text</a>
+                <a style=" width:70px; display:block; text-align:center" class="page-link">@link.Text</a>
             </li>
         }
     </ul>
