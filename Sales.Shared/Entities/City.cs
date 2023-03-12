@@ -16,5 +16,6 @@ namespace Sales.Shared.Entities
 
         //Un ciudad pertenece a un departamento
         public State? State { get; set; }
+        public ICollection<User>? Users { get; set; }
     }
 }
