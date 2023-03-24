@@ -11,6 +11,7 @@
 <div class="mb-2" style="display: flex; flex-wrap:wrap; align-items: center;">
     <div>
         <a class="btn btn-primary" href="/categories/create">Crear Categoria</a>
+        @*<a class="btn btn-primary" @onclick=@(() => ShowModal())>Crear Categoria</a>*@
     </div>
     <div class="mx-2">
         <input style="width: 400px;" type="text" class="form-control" id="titulo" placeholder="Buscar categoria..." @bind-value="Filter" />
@@ -43,6 +44,7 @@
                         </td>
                         <td>
                             <a href="/categories/edit/@category.Id" class="btn btn-warning">Editar</a>
+                            @*<a @onclick=@(() => ShowModal(category.Id, true)) class="btn btn-warning">Editar</a>*@
                             <button class="btn btn-danger" @onclick=@(() => DeleteAsync(category.Id))>Borrar</button>
                         </td>
                     </tr>
@@ -53,6 +55,8 @@
 </GenericList>
 
 @code {
+    [CascadingParameter]
+    IModalService Modal { get; set; } = default!;
 
     private string url { get; set; } = "/api/categories";
     private int currentPage = 1;
@@ -73,6 +77,27 @@
     {
         await GetAllCategory();
     }
+
+    private async Task ShowModal(int id = 0, bool isEdit = false)
+    {
+        IModalReference modalReference;
+
+        if (isEdit)
+        {
+            modalReference = Modal.Show<CategoryEdit>(string.Empty, new ModalParameters().Add("CategoryId", id));
+        }
+        else
+        {
+            modalReference = Modal.Show<CategoryCreate>();
+        }
+
+        var result = await modalReference.Result;
+        if (result.Confirmed)
+        {
+            await GetAllCategory();
+        }
+    }
+
 
     public async Task GetAllCategory(int page = 1)
     {
