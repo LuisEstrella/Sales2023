@@ -4,7 +4,7 @@
         @foreach (var link in Links)
         {
             <li @onclick=@(() => InternalSelectedPage(link)) style="cursor: pointer" class="page-item @(link.Enable ? null : "disabled") @(link.Enable ? "active" : null)">
-                <a style=" width:80px; text-align:center" class="page-link">@link.Text</a>
+                <a style=" width:80px; display:block; text-align:center" class="page-link">@link.Text</a>
             </li>
         }
     </ul>
