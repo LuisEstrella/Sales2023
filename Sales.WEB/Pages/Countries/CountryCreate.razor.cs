@@ -1,4 +1,7 @@
-﻿using CurrieTechnologies.Razor.SweetAlert2;
+﻿using Blazored.Modal;
+using Blazored.Modal.Services;
+using CurrieTechnologies.Razor.SweetAlert2;
+using Microsoft.AspNetCore.Components;
 using Sales.Shared.Entities;
 
 namespace Sales.WEB.Pages.Countries
@@ -10,6 +13,9 @@ namespace Sales.WEB.Pages.Countries
 
         private string url { get; set; } = "/api/countries";
 
+        [CascadingParameter]
+        BlazoredModalInstance BlazoredModal { get; set; } = default!;
+
         private async Task Create()
         {
             var httpResponse = await repository.Post<Country, CountryForm>(url, country);
@@ -19,6 +25,8 @@ namespace Sales.WEB.Pages.Countries
                 await sweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
                 return;
             }
+
+            await BlazoredModal.CloseAsync(ModalResult.Ok());
             Return();
         }
 
