@@ -87,5 +87,27 @@ namespace Sales.API.Controllers
             return Ok(totalPages);
         }
 
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult> Get(int id)
+        {
+            var sale = await _context.Sales
+                .Include(s => s.User!)
+                .ThenInclude(u => u.City!)
+                .ThenInclude(c => c.State!)
+                .ThenInclude(s => s.Country)
+                .Include(s => s.SaleDetails!)
+                .ThenInclude(sd => sd.Product)
+                .ThenInclude(p => p.ProductImages)
+                .FirstOrDefaultAsync(s => s.Id == id);
+
+            if (sale == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(sale);
+        }
+
+
     }
 }
