@@ -56,7 +56,7 @@ else
             await sweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
             return;
         }
-
+        
         productDTO.ProductImages = httpResponse.Response!.Images;
         var toast = sweetAlertService.Mixin(new SweetAlertOptions
             {
